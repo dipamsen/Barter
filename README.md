@@ -1,1 +1,3 @@
 # Barter!
+
+Stage 1: 2813c9a1c9d6404af184e9aa388c7cb41951c442
