@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Image, ScrollView } from 'react-native'
+import { View, StyleSheet, Image, ScrollView, ToastAndroid, Alert } from 'react-native'
 import { Overlay } from 'react-native-elements'
 import { TextInput, Text, Button, IconButton as Icon } from 'react-native-paper'
 import firebase from 'firebase';
@@ -15,7 +15,10 @@ export default class Login extends Component {
     }
   }
   login = () => {
-
+    const { email, password } = this.state;
+    firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
+      ToastAndroid.show("Logged in Successfully", ToastAndroid.SHORT);
+    }).catch(err => Alert.alert("Error", err.message))
   }
   modal = (modalVisible, hideModal) => (
     // Overlay uses Modal Component and gives background gradient
