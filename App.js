@@ -5,11 +5,15 @@ import { Provider, ProgressBar } from 'react-native-paper'
 import * as Font from 'expo-font'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
 // import screens
 import Login from './screens/Login'
 import Dashboard from './screens/Dashboard'
 import Exchange from './screens/Exchange'
+import Settings from './screens/Settings'
+
 import theme from './components/Theme'
+import CustomDrawer from './components/Drawer'
 
 export default class App extends React.Component {
   constructor() {
@@ -63,8 +67,28 @@ const Home = createMaterialBottomTabNavigator({
   activeColor: "#fff"
 })
 
+
+const MainApp = createDrawerNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      drawerLabel: "Home",
+      drawerIcon: ({ focused }) => <Icon name="home" color={focused ? "#5005ff" : "#000"} />
+    }
+  },
+  Settings: {
+    screen: Settings,
+    navigationOptions: {
+      drawerLabel: "Settings",
+      drawerIcon: ({ focused }) => <Icon name="settings" color={focused ? "#5005ff" : "#000"} />
+    }
+  }
+}, {
+  contentComponent: CustomDrawer
+})
+
 const AppScreens = createAppContainer(
   createSwitchNavigator({
-    Login, Home
+    Login, MainApp
   })
 )

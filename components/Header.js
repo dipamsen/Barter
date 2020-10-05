@@ -17,7 +17,7 @@ export default class MyHeader extends Component {
     return (
       <Appbar.Header>
         <Appbar.Action icon="menu" color="#fff"
-        // onPress={() => this.props.navigation.openDrawer()}
+          onPress={() => this.props.navigation.openDrawer()}
         />
         <Appbar.Content title="Barter" />
         <Appbar.Action icon="bell" />
@@ -34,7 +34,10 @@ export default class MyHeader extends Component {
             }}
             title="Sign Out" />
           <Menu.Item
-            onPress={() => { this.props.navigation.navigate("Settings") }}
+            onPress={() => {
+              this.props.navigation.navigate("Settings");
+              hideMenu();
+            }}
             title="Settings" />
         </Menu>
       </Appbar.Header >
