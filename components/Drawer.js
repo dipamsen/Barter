@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, ToastAndroid } from 'react-native'
 import { Button } from 'react-native-paper'
 import { DrawerItems } from "react-navigation-drawer";
+import firebase from 'firebase'
 
 export default class Drawer extends Component {
   render() {
