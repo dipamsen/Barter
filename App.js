@@ -1,9 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Icon } from 'react-native-elements'
 import { Provider, ProgressBar } from 'react-native-paper'
 import * as Font from 'expo-font'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 // import screens
 import Login from './screens/Login'
+import Dashboard from './screens/Dashboard'
+import Exchange from './screens/Exchange'
 import theme from './components/Theme'
 
 export default class App extends React.Component {
@@ -27,22 +32,39 @@ export default class App extends React.Component {
   render() {
     if (this.state.loaded)
       return (
-        // Provider component gives same theme to all its children components
+        // Provider component gives same theme to all its children components (Feature of React Native Paper package)
         <Provider theme={theme}>
-          <View style={{ flex: 1 }}>
-            <Login />
-          </View>
+          <AppScreens />
         </Provider>
       );
+    // // If fonts have not loaded then show Progress (loading) Bar
     else return <ProgressBar indeterminate />
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const Home = createMaterialBottomTabNavigator({
+  Dashboard: {
+    screen: Dashboard,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="home" color={tintColor} />,
+      tabBarColor: "#5005ff"
+    }
   },
-});
+  Exchange: {
+    screen: Exchange,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="exchange" color={tintColor} type="font-awesome" />,
+      tabBarColor: "#349bfb"
+    }
+  }
+}, {
+  shifting: true,
+  inactiveColor: "#dddddd",
+  activeColor: "#fff"
+})
+
+const AppScreens = createAppContainer(
+  createSwitchNavigator({
+    Login, Home
+  })
+)
