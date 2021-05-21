@@ -2,7 +2,6 @@ import { DefaultTheme } from 'react-native-paper'
 
 export default {
   ...DefaultTheme,
-  // dark: true,
   fonts: {
     ...DefaultTheme.fonts,
     regular: {

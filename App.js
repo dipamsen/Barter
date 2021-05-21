@@ -24,6 +24,7 @@ export default class App extends React.Component {
   }
   componentDidMount() {
     // Loading Custom Fonts
+
     Font.loadAsync({
       Regular: require("./assets/fonts/MerriweatherSans-Regular.ttf"),
       Light: require("./assets/fonts/MerriweatherSans-Light.ttf"),
@@ -36,12 +37,10 @@ export default class App extends React.Component {
   render() {
     if (this.state.loaded)
       return (
-        // Provider component gives same theme to all its children components (Feature of React Native Paper package)
         <Provider theme={theme}>
           <AppScreens />
         </Provider>
       );
-    // // If fonts have not loaded then show Progress (loading) Bar
     else return <ProgressBar indeterminate />
   }
 }
@@ -64,7 +63,8 @@ const Home = createMaterialBottomTabNavigator({
 }, {
   shifting: true,
   inactiveColor: "#dddddd",
-  activeColor: "#fff"
+  activeColor: "#fff",
+  theme: theme
 })
 
 
@@ -84,7 +84,14 @@ const MainApp = createDrawerNavigator({
     }
   }
 }, {
-  contentComponent: CustomDrawer
+  contentComponent: CustomDrawer,
+  contentOptions: {
+    labelStyle: {
+      fontFamily: "Bold",
+      fontWeight: "normal"
+    },
+    activeTintColor: '#5005ff'
+  }
 })
 
 const AppScreens = createAppContainer(

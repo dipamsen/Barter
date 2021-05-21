@@ -23,6 +23,7 @@ export default class Login extends Component {
     this.loginListener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         ToastAndroid.show("Logged in Successfully", ToastAndroid.SHORT);
+        console.log("Navigating to HOME")
         this.props.navigation.navigate("Home")
       }
     })
@@ -35,6 +36,7 @@ export default class Login extends Component {
     const { emailID, password } = this.state;
     console.log(this.loginListener)
     firebase.auth().signInWithEmailAndPassword(emailID, password).catch(err => Alert.alert("Error", err.message))
+    this.props.navigation.navigate("Home")
   }
   register = () => {
     const { emailID, password, name, contact, confirmPass, address } = this.state
